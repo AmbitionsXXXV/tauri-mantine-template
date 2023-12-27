@@ -1,0 +1,19 @@
+{
+  "useTabs": false,
+  "printWidth": 90,
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": "*rc",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}

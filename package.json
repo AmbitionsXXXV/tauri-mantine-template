@@ -1,0 +1,34 @@
+{
+  "name": "tauri-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "etc-fe-lint-scan": "etc-fe-lint scan",
+    "etc-fe-lint-fix": "etc-fe-lint fix"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.5.8",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "etc-fe-lint": "^1.1.7",
+    "typescript": "^5.0.2",
+    "vite": "^5.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "etc-fe-lint commit-file-scan",
+      "commit-msg": "etc-fe-lint commit-msg-scan"
+    }
+  }
+}
