@@ -19,6 +19,24 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "path": {
+        "all": true
+      },
+      "fs": {
+        "all": true,
+        "scope": ["$APPDATA", "$APPDATA/*", "$APPCONFIG/*"]
+      },
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true
       }
     },
     "bundle": {
@@ -40,6 +58,7 @@
       {
         "title": "tauri-app",
         "label": "main",
+        "center": true,
         "minWidth": 1000,
         "minHeight": 600,
         "resizable": true,
