@@ -7,9 +7,13 @@
   },
   "package": {
     "productName": "tauri-app",
-    "version": "0.0.0"
+    "version": "../package.json"
   },
   "tauri": {
+    "systemTray": {
+      "iconPath": "icons/SystemTray1.ico",
+      "iconAsTemplate": true
+    },
     "allowlist": {
       "all": false,
       "shell": {
@@ -30,7 +34,7 @@
       ]
     },
     "security": {
-      "csp": null
+      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
     },
     "windows": [
       {
