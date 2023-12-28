@@ -7,12 +7,20 @@ fn greet(name: &str) -> String {
   format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
-#[tauri::command]
-fn sing(name: &str) -> String {
-  format!("ONE OK ROCK {name}")
-}
+pub mod commands;
+pub mod structs;
+
+use commands::fetcher::sing;
+use structs::singer::Singer;
 
 fn main() {
+  let singer = Singer {
+    name: String::from("ONE OK ROCK"),
+    age: 18,
+  };
+
+  println!("{:?}", singer);
+
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![greet, sing])
     .run(tauri::generate_context!())
