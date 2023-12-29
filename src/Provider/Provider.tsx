@@ -1,4 +1,4 @@
-import Splashscreen from '@/Layout/Splashscreen'
+import Fallback from '@/components/Fallback'
 import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core'
 import '@mantine/core/styles.css'
 import { ModalsProvider } from '@mantine/modals'
@@ -44,7 +44,7 @@ const Provider: FC<IProviderProps> = ({ children }) => {
           <BrowserRouter>
             <Notifications />
             {/* show SplashScreen for initial data */}
-            {isLoading ? <Splashscreen /> : children}
+            {isLoading ? <Fallback /> : children}
           </BrowserRouter>
         </ModalsProvider>
       </MantineProvider>

@@ -1,7 +1,7 @@
 import { Center, Loader } from '@mantine/core'
 import type { FC } from 'react'
 
-const Splashscreen: FC = () => {
+const Fallback: FC = () => {
   return (
     <Center style={{ height: '100vh', width: '100vw' }}>
       <Loader size="xl" />
@@ -9,4 +9,4 @@ const Splashscreen: FC = () => {
   )
 }
 
-export default Splashscreen
+export default Fallback
