@@ -1,3 +1,4 @@
+import Splashscreen from '@/Layout/Splashscreen'
 import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core'
 import '@mantine/core/styles.css'
 import { ModalsProvider } from '@mantine/modals'
@@ -6,7 +7,6 @@ import '@mantine/notifications/styles.css'
 import type { FC, ReactElement } from 'react'
 import { useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import Splashscreen from '../Layout/Splashscreen'
 
 export interface IProviderProps {
   children?: ReactElement
