@@ -1,1 +1,1 @@
-pub mod singer;
+pub mod tray_structs;

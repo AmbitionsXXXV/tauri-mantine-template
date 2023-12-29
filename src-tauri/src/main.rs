@@ -1,4 +1,3 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -8,19 +7,15 @@ fn greet(name: &str) -> String {
 }
 
 pub mod commands;
+pub mod menu;
 pub mod structs;
 
 use commands::fetcher::sing;
-use structs::singer::Singer;
+use menu::sys_tray::create_tray_menu;
 use tauri::Manager;
 
 fn main() {
-  let singer = Singer {
-    name: String::from("ONE OK ROCK"),
-    age: 18,
-  };
-
-  println!("{:?}", singer);
+  let sys_tray = create_tray_menu();
 
   tauri::Builder::default()
     .setup(|app| {
@@ -29,6 +24,7 @@ fn main() {
       }
       Ok(())
     })
+    .system_tray(sys_tray)
     .invoke_handler(tauri::generate_handler![greet, sing])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
