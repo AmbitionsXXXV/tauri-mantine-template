@@ -12,6 +12,7 @@ pub mod structs;
 
 use commands::fetcher::sing;
 use structs::singer::Singer;
+use tauri::Manager;
 
 fn main() {
   let singer = Singer {
@@ -22,6 +23,12 @@ fn main() {
   println!("{:?}", singer);
 
   tauri::Builder::default()
+    .setup(|app| {
+      if cfg!(debug_assertions) {
+        app.get_window("main").unwrap().open_devtools(); // `main` is the first window from tauri.conf.json without an explicit label
+      }
+      Ok(())
+    })
     .invoke_handler(tauri::generate_handler![greet, sing])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
