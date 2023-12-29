@@ -1,6 +1,6 @@
+import { SAVE_DELAY } from '@/constant'
 import { Key, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Store } from 'tauri-plugin-store-api' // tauri-store docs: https://github.com/tauri-apps/tauri-plugin-store/blob/dev/webview-src/index.ts
-import { SAVE_DELAY } from '../constant'
 
 const stores: Record<string, any> = {}
 

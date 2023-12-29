@@ -1,4 +1,4 @@
-import { RUNNING_IN_TAURI } from '../constant'
+import { RUNNING_IN_TAURI } from '@/constant'
 import { useLocalForage } from './useLocalForage'
 import { useTauriStore } from './useTauriStore'
 
