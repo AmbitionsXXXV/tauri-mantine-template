@@ -1,3 +1,4 @@
+import { useAsideGuard } from '@/Guard/useAsideGuard'
 import NavLinks from '@/components/NavLinks'
 import { views } from '@/router'
 import {
@@ -20,6 +21,7 @@ import { IMainLayoutProps } from './main-layout.type'
 const { Aside, Header, Main, Navbar, Section } = AppShell
 
 const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
+  const asideGuard = useAsideGuard()
   const [collapsed, toggleCollapsed] = useToggle([true, false])
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   useHotkeys([['ctrl+J', toggleColorScheme]])
@@ -96,13 +98,15 @@ const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
         </Section>
       </Navbar>
 
-      <Aside p="md">
-        <Text>
-          Right Side. Use for help, support, quick action menu? For example, if we were
-          building a trading app, we could use the aside for the trade parameters while
-          leaving the main UI with the data
-        </Text>
-      </Aside>
+      {!asideGuard && (
+        <Aside p="md">
+          <Text>
+            Right Side. Use for help, support, quick action menu? For example, if we were
+            building a trading app, we could use the aside for the trade parameters while
+            leaving the main UI with the data
+          </Text>
+        </Aside>
+      )}
     </AppShell>
   )
 }
