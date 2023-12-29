@@ -43,8 +43,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "etc-fe-lint commit-file-scan",
-      "commit-msg": "etc-fe-lint commit-msg-scan"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
