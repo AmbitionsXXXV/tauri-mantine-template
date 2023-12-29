@@ -7,6 +7,7 @@ export const SAVE_DELAY = 500
 export const APP_NAME = tauriConfJson.package.productName
 export const VERSION = packageJson.version
 export const WINDOW_TITLE = 'WINDOW_TITLE set in utils.js'
-export const RUNNING_IN_TAURI = window.__TAURI__ !== undefined
+export const RUNNING_IN_TAURI = (window as any).__TAURI__ !== undefined
 export const IS_DEVELOPMENT = import.meta.env.MODE === 'development'
 export const IS_PRODUCTION = !IS_DEVELOPMENT
+export const WIN32_CUSTOM_TITLEBAR = true
