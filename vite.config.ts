@@ -1,10 +1,10 @@
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
-export default defineConfig(async () => ({
+export default defineConfig(() => ({
   plugins: [react(), visualizer()],
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
@@ -17,6 +17,15 @@ export default defineConfig(async () => ({
       '@tauri/': `${path.resolve(__dirname, 'src-tauri')}/`
     }
   },
+  envPrefix: [
+    'VITE_',
+    'TAURI_PLATFORM',
+    'TAURI_ARCH',
+    'TAURI_FAMILY',
+    'TAURI_PLATFORM_VERSION',
+    'TAURI_PLATFORM_TYPE',
+    'TAURI_DEBUG'
+  ],
   server: {
     port: 1421,
     strictPort: true,
@@ -27,6 +36,7 @@ export default defineConfig(async () => ({
   },
   build: {
     target: ['es2021', 'chrome100', 'safari13'],
+    minify: (process.env.TAURI_DEBUG ? false : 'esbuild') as 'esbuild' | boolean,
     sourcemap: !!process.env.TAURI_DEBUG
   }
 }))

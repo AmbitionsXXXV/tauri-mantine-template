@@ -7,3 +7,4 @@ node_modules/
 **/*.min.js
 **/*-min.js
 **/*.bundle.js
+vite.config.ts
