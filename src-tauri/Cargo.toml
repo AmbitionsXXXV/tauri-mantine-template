@@ -14,18 +14,20 @@ tauri-build = { version = "1.5", features = [] }
 
 [dependencies]
 tauri = { version = "1.6.1", features = [
+  "dialog-save",
+  "dialog-open",
   "fs-all",
-  "window-unmaximize",
-  "window-maximize",
-  "window-show",
-  "window-start-dragging",
-  "window-close",
-  "window-hide",
-  "window-unminimize",
-  "window-minimize",
+  "protocol-asset",
+  "shell-all",
+  "clipboard-all",
+  "os-all",
+  "http-all",
+  "http-multipart",
+  "notification-all",
+  "global-shortcut-all",
+  "window-all",
   "path-all",
   "system-tray",
-  "shell-open",
   "devtools",
 ] }
 tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
@@ -34,7 +36,13 @@ tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspac
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+once_cell = "1.19.0"
+dirs = "5.0.1"
 log = "^0.4"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+macos-accessibility-client = "0.0.1"
+window-shadows = "0.2"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
