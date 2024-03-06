@@ -97,6 +97,11 @@
         "decorations": true,
         "alwaysOnTop": false
       }
-    ]
+    ],
+    "updater": {
+      "active": true,
+      "dialog": true,
+      "pubkey": ""
+    }
   }
 }
