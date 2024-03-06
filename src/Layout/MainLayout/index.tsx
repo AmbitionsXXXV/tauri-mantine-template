@@ -1,4 +1,5 @@
 import { useAsideGuard } from '@/Guard/useAsideGuard'
+import { IMainLayoutProps } from '@/Layout/MainLayout/main-layout.type'
 import NavLinks from '@/components/NavLinks'
 import { views } from '@/router'
 import {
@@ -11,12 +12,12 @@ import {
   useMantineColorScheme
 } from '@mantine/core'
 import { useHotkeys, useToggle } from '@mantine/hooks'
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { BsMoonStarsFill } from 'react-icons/bs'
 import { IoSunnySharp } from 'react-icons/io5'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { Store } from 'tauri-plugin-store-api'
 import classes from './main-layout.module.css'
-import { IMainLayoutProps } from './main-layout.type'
 
 const { Aside, Header, Main, Navbar, Section } = AppShell
 
@@ -25,6 +26,16 @@ const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
   const [collapsed, toggleCollapsed] = useToggle([true, false])
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   useHotkeys([['ctrl+J', toggleColorScheme]])
+
+  useEffect(() => {
+    ;(async () => {
+      const store = new Store('config.json')
+      await store.set('colorScheme', colorScheme)
+      const val = await store.get('colorScheme')
+      console.log(val)
+      await store.save()
+    })()
+  }, [])
 
   return (
     <AppShell

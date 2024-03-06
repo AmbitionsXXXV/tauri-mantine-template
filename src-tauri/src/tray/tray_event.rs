@@ -1,3 +1,4 @@
+use log::info;
 use serde::Serialize;
 use tauri::{AppHandle, Manager, SystemTrayEvent};
 
@@ -78,4 +79,10 @@ pub fn handle_tray_event(app: &AppHandle, event: SystemTrayEvent) {
     }
     _ => {}
   }
+}
+
+fn on_quit_click(app: &AppHandle) {
+  app.global_shortcut_manager().unregister_all().unwrap();
+  info!("============== Quit App ==============");
+  app.exit(0);
 }
