@@ -81,8 +81,7 @@ pub fn handle_tray_event(app: &AppHandle, event: SystemTrayEvent) {
   }
 }
 
-fn on_quit_click(app: &AppHandle) {
-  app.global_shortcut_manager().unregister_all().unwrap();
+fn _on_quit_click(app: &AppHandle) {
   info!("============== Quit App ==============");
   app.exit(0);
 }

@@ -1,19 +1,23 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 pub mod commands;
+pub mod config;
 pub mod plugin;
 pub mod structs;
 pub mod tray;
+pub mod updater;
 
 use commands::fetcher::*;
 use commands::store::*;
+use config::*;
+use log::info;
+use once_cell::sync::OnceCell;
 use plugin::{init_plugins::init_plugins, plugins::create_plugins};
-use serde_json::json;
 use tauri::Manager;
-use tauri::Wry;
-use tauri_plugin_store::with_store;
-use tauri_plugin_store::StoreCollection;
 use tray::sys_tray::create_tray_menu;
+use updater::*;
+
+pub static APP: OnceCell<tauri::AppHandle> = OnceCell::new();
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -34,17 +38,25 @@ fn main() {
     plugins,
   )
   .setup(|app| {
-    let app_handle = app.handle();
-    let mut app_data_dir = app_handle.path_resolver().app_data_dir().unwrap();
-    app_data_dir.push("config.json");
-    print!("{:?}", app_data_dir);
+    info!("============== Start App ==============");
 
-    let stores = app.state::<StoreCollection<Wry>>();
+    #[cfg(target_os = "macos")]
+    {
+      // 在 mac 上，需要请求辅助功能权限
+      app.set_activation_policy(tauri::ActivationPolicy::Accessory);
+      let trusted = macos_accessibility_client::accessibility::application_is_trusted_with_prompt();
+      info!("MacOS Accessibility Trusted: {}", trusted);
+    }
 
-    with_store(app.app_handle(), stores, app_data_dir.clone(), |store| {
-      store.insert("a".to_string(), json!("b"))
-    })
-    .unwrap();
+    // Global AppHandle
+    APP.get_or_init(|| app.handle());
+
+    // Init Config
+    info!("Init Config Store");
+    init_config(app);
+
+    // Check Update
+    // check_update(app.handle());
 
     Ok(())
   })
